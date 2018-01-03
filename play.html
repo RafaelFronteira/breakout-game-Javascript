@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Física Games</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <style>
+        body {    
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    
+    </style>
+    <script src="index.js"></script>
+</head>
+<body>
+    <h5 style="position: absolute; right: 500px; top:0; font-size: 50px">Score: <span id="point">0</span></h5>
+    
+    <div id="alertContainer" class="text-center " 
+        style="visibility:hidden; background-color:aliceblue; 
+        position:absolute; top:45%; left: 35%; 
+        border: 1px solid rgb(141, 141, 141);
+        border-radius: 5px; 
+        width:350px; height: 170px">
+
+        <p id="alertTitle" class="mx-2 my-0 font-weight-bold">Title</p>
+        <p id="alertMessage" class="mx-2 my-3">Message</p>
+        <span style="position: absolute; bottom:10%; left:15%" class="btn btn-info w-75" onclick="resetPage()">OK</span>   
+    </div>
+</body>
+</html>

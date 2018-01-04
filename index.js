@@ -397,10 +397,11 @@ window.onload = function () {
         alertMessage.textContent = message
         alertContainer.style.visibility = "visible"
 
-        const p = document.createElement("p")
-        p.textContent = "Score: "+score
-        alertContainer.appendChild(p)
-
+        if(!title === "Ops...") {
+            const p = document.createElement("p")
+            p.textContent = "Score: "+score
+            alertContainer.appendChild(p)
+        }
     }
 
 }

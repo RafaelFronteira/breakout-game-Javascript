@@ -10,7 +10,7 @@ window.onload = function () {
     let context =  canvas.getContext("2d"),
         score = 0 
         width = canvas.width = canvasContainer.offsetWidth,
-        height = canvas.height = 600,
+        height = canvas.height = 500,
         level = 1,
         isMobile = false
 
@@ -31,7 +31,7 @@ window.onload = function () {
 
         box.push({
             x: 100,
-            y: 565,
+            y: 465,
             height: 30,
             width: 125,
             color: getColor()
@@ -39,10 +39,10 @@ window.onload = function () {
 
         points.push({
             x: 135,
-            y: 545,
+            y: 445,
             d: 15,
             oldX: 130,
-            oldY: 540,
+            oldY: 440,
             color: getColor()
         })
         
@@ -244,29 +244,29 @@ window.onload = function () {
     function createBox() {
         if(isMobile) {
             box.push(   
-                { x: 003, y: 10, height: 20, width: 100, color: getColor()},
-                { x: 120, y: 10, height: 20, width: 100, color: getColor()},
-                { x: 250, y: 10, height: 20, width: 100, color: getColor()},
+                { x: (width/width) + 5, y: 10, height: 20, width: 100, color: getColor()},
+                { x: width/2.3,         y: 10, height: 20, width: 100, color: getColor()},
+                { x: width-110,         y: 10, height: 20, width: 100, color: getColor()},
 
-                { x: 010, y: 40, height: 20, width: 100, color: getColor()},
-                { x: 160, y: 40, height: 20, width: 100, color: getColor()},
-                { x: 280, y: 40, height: 20, width: 100, color: getColor()},
+                { x: 20,           y: 40, height: 20, width: 100, color: getColor()},
+                { x: width/2.9,    y: 40, height: 20, width: 100, color: getColor()},
+                { x: width-150,    y: 40, height: 20, width: 100, color: getColor()},
 
-                { x: 003, y: 70, height: 20, width: 100, color: getColor()},
-                { x: 120, y: 70, height: 20, width: 100, color: getColor()},
-                { x: 250, y: 70, height: 20, width: 100, color: getColor()},
+                { x: (width/width) + 5, y: 70, height: 20, width: 100, color: getColor()},
+                { x: width/2.3,         y: 70, height: 20, width: 100, color: getColor()},
+                { x: width-110,         y: 70, height: 20, width: 100, color: getColor()},
 
-                { x: 010, y: 100, height: 20, width: 100, color: getColor()},
-                { x: 160, y: 100, height: 20, width: 100, color: getColor()},
-                { x: 280, y: 100, height: 20, width: 100, color: getColor()},
+                { x: 20,           y: 100, height: 20, width: 100, color: getColor()},
+                { x: width/2.9,    y: 100, height: 20, width: 100, color: getColor()},
+                { x: width-150,    y: 100, height: 20, width: 100, color: getColor()},
 
-                { x: 003, y: 130, height: 20, width: 100, color: getColor()},
-                { x: 120, y: 130, height: 20, width: 100, color: getColor()},
-                { x: 250, y: 130, height: 20, width: 100, color: getColor()},
+                { x: (width/width) + 5, y: 130, height: 20, width: 100, color: getColor()},
+                { x: width/2.3,         y: 130, height: 20, width: 100, color: getColor()},
+                { x: width-110,         y: 130, height: 20, width: 100, color: getColor()},
 
-                { x: 010, y: 160, height: 20, width: 100, color: getColor()},
-                { x: 160, y: 160, height: 20, width: 100, color: getColor()},
-                { x: 280, y: 160, height: 20, width: 100, color: getColor()},
+                { x: 20,           y: 160, height: 20, width: 100, color: getColor()},
+                { x: width/2.9,    y: 160, height: 20, width: 100, color: getColor()},
+                { x: width-150,    y: 160, height: 20, width: 100, color: getColor()},
             )
         }
         else {
@@ -294,7 +294,7 @@ window.onload = function () {
 
                 box[0] = {
                     x: 100,
-                    y: 565,
+                    y: 465,
                     height: 30,
                     width: 125,
                     color: getColor()
@@ -302,40 +302,40 @@ window.onload = function () {
         
                 points[0] = {
                     x: 120,
-                    y: 545,
+                    y: 445,
                     d: 15,
                     oldX: 115,
-                    oldY: 540,
+                    oldY: 440,
                     color: getColor()
                 }
 
                 if(level === 3) {
                     points.push({
                         x: 130,
-                        y: 545,
+                        y: 445,
                         d: 15,
                         oldX: 125,
-                        oldY: 540,
+                        oldY: 440,
                         color: getColor()
                     })
                 }
                 else if (level === 15) {
                     points.push({
                         x: 133,
-                        y: 545,
+                        y: 445,
                         d: 15,
                         oldX: 129,
-                        oldY: 540,
+                        oldY: 440,
                         color: getColor()
                     })
                 }
                 else if (level === 25) {
                     points.push({
                         x: 129,
-                        y: 545,
+                        y: 445,
                         d: 15,
                         oldX: 134,
-                        oldY: 540,
+                        oldY: 440,
                         color: getColor()
                     })
                 }
@@ -352,10 +352,10 @@ window.onload = function () {
                 else if (level === 50) {
                     points.push({
                         x: 135,
-                        y: 545,
+                        y: 445,
                         d: 15,
                         oldX: 130,
-                        oldY: 540,
+                        oldY: 440,
                         color: getColor()
                     })
                 }
@@ -364,7 +364,7 @@ window.onload = function () {
             } else {
                 box[0] = {
                     x: 250,
-                    y: 550,
+                    y: 450,
                     height: 40,
                     width: 205,
                     color: getColor()
@@ -372,9 +372,9 @@ window.onload = function () {
     
                 points[0] = {
                     x: 290,
-                    y: 545,
+                    y: 445,
                     oldX: 285,
-                    oldY: 540,
+                    oldY: 440,
                     color: getColor()
                 }
             }

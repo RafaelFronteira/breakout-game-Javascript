@@ -26,7 +26,7 @@ window.onload = function () {
     console.log("Width => ", width)
 
 
-    if(width >= 300 && width <= 480) {  
+    if(width >= 300 && width <= 500) {  
         isMobile = true
 
         box.push({
@@ -46,6 +46,8 @@ window.onload = function () {
             color: getColor()
         })
         
+    } else {
+        alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
     }
   
 

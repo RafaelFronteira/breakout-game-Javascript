@@ -12,7 +12,7 @@ window.onload = function () {
         width = canvas.width = canvasContainer.offsetWidth,
         height = canvas.height = 500,
         level = 1,
-        isMobile = false
+        typeScreen = { xSmall: false, small: false, middle: false, large: false, xLarge: false }
 
     canvas.style.border = "1px solid #000"
 
@@ -26,8 +26,8 @@ window.onload = function () {
     console.log("Width => ", width)
 
 
-    if(width >= 300 && width <= 500) {  
-        isMobile = true
+    if(width < 544) {  
+        typeScreen.xSmall = true
 
         box.push({
             x: 100,
@@ -46,7 +46,37 @@ window.onload = function () {
             color: getColor()
         })
         
-    } else {
+    } else if(width >= 544 && width < 768){
+        typeScreen.small = true
+
+        box.push({
+            x: 100,
+            y: 465,
+            height: 30,
+            width: 125,
+            color: getColor()
+        });
+
+        points.push({
+            x: 135,
+            y: 435,
+            d: 15,
+            oldX: 130,
+            oldY: 430,
+            color: getColor()
+        })
+
+    } else if(width >= 768 && width < 992){
+        typeScreen.middle = true
+        alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
+    } else if(width >= 992 && width < 1200) {
+        typeScreen.large = true
+        alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
+    } else if(width >= 1200) {
+        typeScreen.xLarge = true
+        alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
+    }
+    else {
         alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
     }
   
@@ -242,7 +272,7 @@ window.onload = function () {
     }
 
     function createBox() {
-        if(isMobile) {
+        if(typeScreen.xSmall) {
             box.push(   
                 { x: (width/width) + 5, y: 10, height: 20, width: 100, color: getColor()},
                 { x: width/2.3,         y: 10, height: 20, width: 100, color: getColor()},
@@ -269,18 +299,53 @@ window.onload = function () {
                 { x: width-150,    y: 160, height: 20, width: 100, color: getColor()},
             )
         }
-        else {
+        else if(typeScreen.small) {
             box.push(   
-                { x: 003, y: 10, height: 20, width: 100, color: getColor()},
-                { x: 120, y: 10, height: 20, width: 100, color: getColor()},
-                { x: 250, y: 10, height: 20, width: 100, color: getColor()},
-                { x: 250, y: 10, height: 20, width: 100, color: getColor()},
+                { x: (width/width) + 5, y: 10, height: 20, width: 100, color: getColor()},
+                { x: width/5,           y: 10, height: 20, width: 100, color: getColor()},
+                { x: (width/3.3) + 50,  y: 10, height: 20, width: 100, color: getColor()},
+                { x: (width/1.7),       y: 10, height: 20, width: 100, color: getColor()},
+                { x: width-110,         y: 10, height: 20, width: 100, color: getColor()},
 
-                { x: 010, y: 40, height: 20, width: 100, color: getColor()},
-                { x: 160, y: 40, height: 20, width: 100, color: getColor()},
-                { x: 280, y: 40, height: 20, width: 100, color: getColor()},
-                { x: 280, y: 40, height: 20, width: 100, color: getColor()},
+                { x: 20,                y: 40, height: 20, width: 100, color: getColor()},
+                { x: width/4,           y: 40, height: 20, width: 100, color: getColor()},
+                { x: (width/3.2) + 80,  y: 40, height: 20, width: 100, color: getColor()},
+                { x: (width/1.6) + 10,  y: 40, height: 20, width: 100, color: getColor()},
+                { x: width-90,          y: 40, height: 20, width: 100, color: getColor()},
+
+                { x: (width/width) + 5, y: 70, height: 20, width: 100, color: getColor()},
+                { x: width/5,           y: 70, height: 20, width: 100, color: getColor()},
+                { x: (width/3.3) + 50,  y: 70, height: 20, width: 100, color: getColor()},
+                { x: (width/1.7),       y: 70, height: 20, width: 100, color: getColor()},
+                { x: width-110,         y: 70, height: 20, width: 100, color: getColor()},
+
+                { x: 20,                y: 100, height: 20, width: 100, color: getColor()},
+                { x: width/4,           y: 100, height: 20, width: 100, color: getColor()},
+                { x: (width/3.2) + 80,  y: 100, height: 20, width: 100, color: getColor()},
+                { x: (width/1.6) + 10,  y: 100, height: 20, width: 100, color: getColor()},
+                { x: width-90,          y: 100, height: 20, width: 100, color: getColor()},
+
+                { x: (width/width) + 5, y: 130, height: 20, width: 100, color: getColor()},
+                { x: width/5,           y: 130, height: 20, width: 100, color: getColor()},
+                { x: (width/3.3) + 50,  y: 130, height: 20, width: 100, color: getColor()},
+                { x: (width/1.7),       y: 130, height: 20, width: 100, color: getColor()},
+                { x: width-110,         y: 130, height: 20, width: 100, color: getColor()},
+
+                { x: 20,                y: 160, height: 20, width: 100, color: getColor()},
+                { x: width/4,           y: 160, height: 20, width: 100, color: getColor()},
+                { x: (width/3.2) + 80,  y: 160, height: 20, width: 100, color: getColor()},
+                { x: (width/1.6) + 10,  y: 160, height: 20, width: 100, color: getColor()},
+                { x: width-90,          y: 160, height: 20, width: 100, color: getColor()},
+
             )
+
+        } else if(typeScreen.middle) {
+
+        } else if(typeScreen.large){
+
+        }
+        else if(typeScreen.xLarge) {
+
         }
     }
 
@@ -289,7 +354,7 @@ window.onload = function () {
             level++
             levelText.textContent = level.toString()
 
-            if(isMobile) {
+            if(typeScreen.xSmall) {
                 createBox()
 
                 box[0] = {

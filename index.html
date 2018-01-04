@@ -7,18 +7,27 @@
     <title>Breakout Game</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
+    
 </head>
 <body>
-    <div class="board">
-        <h5 class="score">Score: <span id="point"></span></h5>
-        <h6 class="level">Level: <span id="level"></span></h6>
+    <div class="container w-100 mw-100 h-100 mh-100 text-center mx-auto main">
+
+        <div class="row">
+            <h5 class="col">Score: <span id="point"></span></h5>
+            <h5 class="col">Level: <span id="level"></span></h5>
+        </div>
+        
+        <div id="canvasContainer" class="mx-auto row canvas-container"></div>
+
+        
+        <div id="alertContainer" class="text-center alert-container">
+            <p id="alertTitle" class="mx-2 my-0 font-weight-bold"></p>
+            <p id="alertMessage" class="mx-2 my-3"></p>
+            <span class="btn btn-info w-75 alert-button" onclick="resetPage()">OK</span>   
+        </div>
     </div>
 
-    <div id="alertContainer" class="text-center alert-container">
-        <p id="alertTitle" class="mx-2 my-0 font-weight-bold"></p>
-        <p id="alertMessage" class="mx-2 my-3"></p>
-        <span class="btn btn-info w-75 alert-button" onclick="resetPage()">OK</span>   
-    </div>
+
+    <script src="index.js"></script>
 </body>
 </html>

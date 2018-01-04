@@ -1,43 +1,54 @@
 window.onload = function () {
+    const hexa = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
+    const canvasContainer = document.getElementById("canvasContainer")
     const scoreText = document.getElementById("point")
     const alertContainer = document.getElementById("alertContainer")
     const alertTitle = document.getElementById("alertTitle")
     const alertMessage = document.getElementById("alertMessage")
-    const hexa = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
     const canvas = document.createElement("canvas")
     const levelText = document.getElementById("level")
-
     let context =  canvas.getContext("2d"),
-    score = 0 
-    width = canvas.width = 600,
-    height = canvas.height = 600,
-    level = 1
+        score = 0 
+        width = canvas.width = canvasContainer.offsetWidth,
+        height = canvas.height = 600,
+        level = 1,
+        isMobile = false
 
     canvas.style.border = "1px solid #000"
-    canvas.classList.add('canvas-container')
 
     scoreText.textContent = score.toString()
     levelText.textContent = level.toString()
-    document.body.appendChild(canvas)
+    canvasContainer.appendChild(canvas)
 
-   let points = [],
+    let points = [],
        box = [];
 
-   points.push({
-       x: 290,
-       y: 545,
-       oldX: 285,
-       oldY: 540,
-       color: getColor()
-    })
+    console.log("Width => ", width)
 
-    box.push({
-        x: 250,
-        y: 550,
-        height: 40,
-        width: 205,
-        color: getColor()
-    });
+
+    if(width > 329 && width < 410) {  
+        isMobile = true
+
+        box.push({
+            x: 100,
+            y: 565,
+            height: 30,
+            width: 125,
+            color: getColor()
+        });
+
+        points.push({
+            x: 135,
+            y: 545,
+            d: 15,
+            oldX: 130,
+            oldY: 540,
+            color: getColor()
+        })
+        
+    }
+  
+
 
     createBox()
 
@@ -70,8 +81,8 @@ window.onload = function () {
         const b = box[0]
         const touch = event.changedTouches;
 
-        if(touch[0].pageX < (b.x + b.width) ) {
-            b.x = touch[0].pageX - (b.width / 10)
+        if(touch[0].pageX < (b.x + b.width+10) ) {
+            b.x = touch[0].pageX - (b.width / 7)
         }
     }
 
@@ -107,7 +118,7 @@ window.onload = function () {
             const p = points[i]
             context.beginPath();
             context.fillStyle = p.color
-            context.arc(p.x, p.y, 20, 0, Math.PI * 2)
+            context.arc(p.x, p.y, p.d, 0, Math.PI * 2)
             context.fill()
         }
     }
@@ -229,104 +240,128 @@ window.onload = function () {
     }
 
     function createBox() {
-        box.push(
-            { x: 10,  y: 10,  height: 20, width: 100, color: getColor() },
-            { x: 115, y: 10, height: 20, width: 100, color: getColor() },
-            { x: 220, y: 10, height: 20, width: 100, color: getColor() },
-            { x: 327, y: 10, height: 20, width: 100, color: getColor() },
-            { x: 434, y: 10, height: 20, width: 100, color: getColor() },
-            
-            { x: 490, y: 40, height: 20, width: 100, color: getColor() },
-            { x: 380, y: 40, height: 20, width: 100, color: getColor() },
-            { x: 270, y: 40, height: 20, width: 100, color: getColor() },
-            { x: 160, y: 40, height: 20, width: 100, color: getColor() },
-            { x: 50,  y: 40, height: 20, width: 100, color: getColor() },
-            
-            { x: 20,  y: 70,  height: 20, width: 100, color: getColor() },
-            { x: 129, y: 70,  height: 20, width: 100, color: getColor() },
-            { x: 236, y: 70,  height: 20, width: 100, color: getColor() },
-            { x: 345, y: 70,  height: 20, width: 100, color: getColor() },
-            { x: 457, y: 70,  height: 20, width: 100, color: getColor() },
-    
-            { x: 490, y: 105, height: 20, width: 100, color: getColor() },
-            { x: 380, y: 105, height: 20, width: 100, color: getColor() },
-            { x: 270, y: 105, height: 20, width: 100, color: getColor() },
-            { x: 160, y: 105, height: 20, width: 100, color: getColor() },
-            { x: 50,  y: 105, height: 20, width: 100, color: getColor() },
-    
-            { x: 20,  y: 135,  height: 20, width: 100, color: getColor() },
-            { x: 129, y: 135,  height: 20, width: 100, color: getColor() },
-            { x: 236, y: 135,  height: 20, width: 100, color: getColor() },
-            { x: 345, y: 135,  height: 20, width: 100, color: getColor() },
-            { x: 457, y: 135,  height: 20, width: 100, color: getColor() },
-        )
+        if(isMobile) {
+            box.push(   
+                { x: 003, y: 10, height: 20, width: 100, color: getColor()},
+                { x: 120, y: 10, height: 20, width: 100, color: getColor()},
+                { x: 250, y: 10, height: 20, width: 100, color: getColor()},
+
+                { x: 010, y: 40, height: 20, width: 100, color: getColor()},
+                { x: 160, y: 40, height: 20, width: 100, color: getColor()},
+                { x: 280, y: 40, height: 20, width: 100, color: getColor()},
+
+                { x: 003, y: 70, height: 20, width: 100, color: getColor()},
+                { x: 120, y: 70, height: 20, width: 100, color: getColor()},
+                { x: 250, y: 70, height: 20, width: 100, color: getColor()},
+
+                { x: 010, y: 100, height: 20, width: 100, color: getColor()},
+                { x: 160, y: 100, height: 20, width: 100, color: getColor()},
+                { x: 280, y: 100, height: 20, width: 100, color: getColor()},
+
+                { x: 003, y: 130, height: 20, width: 100, color: getColor()},
+                { x: 120, y: 130, height: 20, width: 100, color: getColor()},
+                { x: 250, y: 130, height: 20, width: 100, color: getColor()},
+
+                { x: 010, y: 160, height: 20, width: 100, color: getColor()},
+                { x: 160, y: 160, height: 20, width: 100, color: getColor()},
+                { x: 280, y: 160, height: 20, width: 100, color: getColor()},
+            )
+        }
     }
 
     function doWin() {
         if(box.length === 1) {
-            createBox()
-
-            box[0] = {
-                x: 250,
-                y: 550,
-                height: 40,
-                width: 205,
-                color: getColor()
-            }
-
-            points[0] = {
-                x: 290,
-                y: 545,
-                oldX: 285,
-                oldY: 540,
-                color: getColor()
-            }
             level++
             levelText.textContent = level.toString()
-            if(level === 5) {
-                points.push({
-                    x: 134,
-                    y: 145,
-                    oldX: 130,
-                    oldY: 140,
+
+            if(isMobile) {
+                createBox()
+
+                box[0] = {
+                    x: 100,
+                    y: 565,
+                    height: 30,
+                    width: 125,
                     color: getColor()
-                })
-            }
-            else if (level === 15) {
-                points.push({
-                    x: 134,
-                    y: 145,
-                    oldX: 130,
-                    oldY: 140,
+                }
+        
+                points[0] = {
+                    x: 120,
+                    y: 545,
+                    d: 15,
+                    oldX: 115,
+                    oldY: 540,
                     color: getColor()
-                })
-            }
-            else if (level === 25) {
-                points.push({
-                    x: 134,
-                    y: 145,
-                    oldX: 130,
-                    oldY: 140,
+                }
+
+                if(level === 3) {
+                    points.push({
+                        x: 130,
+                        y: 545,
+                        d: 15,
+                        oldX: 125,
+                        oldY: 540,
+                        color: getColor()
+                    })
+                }
+                else if (level === 15) {
+                    points.push({
+                        x: 133,
+                        y: 545,
+                        d: 15,
+                        oldX: 129,
+                        oldY: 540,
+                        color: getColor()
+                    })
+                }
+                else if (level === 25) {
+                    points.push({
+                        x: 129,
+                        y: 545,
+                        d: 15,
+                        oldX: 134,
+                        oldY: 540,
+                        color: getColor()
+                    })
+                }
+                else if (level === 35) {
+                    points.push({
+                        x: 130,
+                        y: 545,
+                        d: 15,
+                        oldX: 125,
+                        oldY: 540,
+                        color: getColor()
+                    })
+                }
+                else if (level === 50) {
+                    points.push({
+                        x: 135,
+                        y: 545,
+                        d: 15,
+                        oldX: 130,
+                        oldY: 540,
+                        color: getColor()
+                    })
+                }
+
+    
+            } else {
+                box[0] = {
+                    x: 250,
+                    y: 550,
+                    height: 40,
+                    width: 205,
                     color: getColor()
-                })
-            }
-            else if (level === 35) {
-                points.push({
-                    x: 134,
-                    y: 145,
-                    oldX: 130,
-                    oldY: 140,
+                }
+    
+                points[0] = {
+                    x: 290,
+                    y: 545,
+                    oldX: 285,
+                    oldY: 540,
                     color: getColor()
-                })
-            }
-            else if (level === 50) {
-                points.push({
-                    x: 134,
-                    y: 145,
-                    oldX: 130,
-                    oldY: 140,
-                    color: getColor()
-                })
+                }
             }
         }
     }
@@ -352,8 +387,8 @@ window.onload = function () {
         alertContainer.appendChild(p)
 
     }
-}
 
+}
 
 function resetPage() {
     window.location.reload()

@@ -5,14 +5,18 @@ window.onload = function () {
     const alertMessage = document.getElementById("alertMessage")
     const hexa = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
     const canvas = document.createElement("canvas")
+    const levelText = document.getElementById("level")
 
     let context =  canvas.getContext("2d"),
     score = 0 
     width = canvas.width = 600,
-    height = canvas.height = 600
+    height = canvas.height = 600,
+    level = 1
+
     canvas.style.border = "1px solid #000"
 
-    scoreText.textContent = score.toString();
+    scoreText.textContent = score.toString()
+    levelText.textContent = level.toString()
     document.body.appendChild(canvas)
 
    let points = [],
@@ -24,13 +28,7 @@ window.onload = function () {
        oldX: 285,
        oldY: 540,
        color: getColor()
-    },{
-        x: 134,
-        y: 145,
-        oldX: 130,
-        oldY: 140,
-        color: getColor()
-     })
+    })
 
     box.push({
         x: 250,
@@ -86,7 +84,7 @@ window.onload = function () {
             const p = points[i]
             context.beginPath();
             context.fillStyle = p.color
-            context.arc(p.x, p.y, 25, 0, Math.PI * 2)
+            context.arc(p.x, p.y, 20, 0, Math.PI * 2)
             context.fill()
         }
     }
@@ -117,7 +115,7 @@ window.onload = function () {
 
         //Detectando colisão eixo Y da borda do canvas
         if(p.y > height - 1) {
-            alertPlayer("OOU NOOU!", " VOCÊ PERDEU")
+            alertPlayer("OOU NOOU!", " Fim de jogo")
         }
         else if(p.y < 0) {
             p.color = getColor()
@@ -139,27 +137,21 @@ window.onload = function () {
                 score += 20    
                 scoreText.textContent = score.toString();
             }
-
-            //colisão lado direito
-            if(p.x <= (b.x + b.width) && p.y >= b.y && p.y <= (b.y + b.height) && p.x >= (b.x + b.width) + vx && p.x < width) {
+            else if(p.x <= (b.x + b.width) && p.y >= b.y && p.y <= (b.y + b.height) && p.x >= (b.x + b.width) + vx && p.x < width) {
                 p.x = (b.x + b.width)
                 p.oldX = (b.x + b.width) + vx
                 box.splice(i, 1)   
                 score += 20
                 scoreText.textContent = score.toString();
             }
-
-            //colisão no topo
-            if(p.y >= b.y && p.x >= b.x && p.x <= (b.x + b.width) && p.y > 0 && p.y <= b.y + vy) {
+            else if(p.y >= b.y && p.x >= b.x && p.x <= (b.x + b.width) && p.y > 0 && p.y <= b.y + vy) {
                 p.y = b.y
                 p.oldY = b.y + vy
                 box.splice(i, 1)   
                 score += 20
                 scoreText.textContent = score.toString();
             }
-
-            //colisão em baixo
-            if(p.y <= (b.y + b.height) && p.x >= b.x && p.x <= (b.x + b.width) && p.y >= (b.y + b.height) + vy && p.y < height) {
+            else if(p.y <= (b.y + b.height) && p.x >= b.x && p.x <= (b.x + b.width) && p.y >= (b.y + b.height) + vy && p.y < height) {
                 p.y = (b.y + b.height)
                 p.oldY = (b.y + b.height) + vy
                 box.splice(i, 1)   
@@ -227,41 +219,88 @@ window.onload = function () {
 
     function createBox() {
         box.push(
-        { x: 10,  y: 10,  height: 20, width: 100, color: getColor() },
-        { x: 115, y: 10, height: 20, width: 100, color: getColor() },
-        { x: 220, y: 10, height: 20, width: 100, color: getColor() },
-        { x: 327, y: 10, height: 20, width: 100, color: getColor() },
-        { x: 434, y: 10, height: 20, width: 100, color: getColor() },
-        
-        { x: 490, y: 40, height: 20, width: 100, color: getColor() },
-        { x: 380, y: 40, height: 20, width: 100, color: getColor() },
-        { x: 270, y: 40, height: 20, width: 100, color: getColor() },
-        { x: 160, y: 40, height: 20, width: 100, color: getColor() },
-        { x: 50,  y: 40, height: 20, width: 100, color: getColor() },
-        
-        { x: 20,  y: 70,  height: 20, width: 100, color: getColor() },
-        { x: 129, y: 70,  height: 20, width: 100, color: getColor() },
-        { x: 236, y: 70,  height: 20, width: 100, color: getColor() },
-        { x: 345, y: 70,  height: 20, width: 100, color: getColor() },
-        { x: 457, y: 70,  height: 20, width: 100, color: getColor() },
-
-        { x: 490, y: 105, height: 20, width: 100, color: getColor() },
-        { x: 380, y: 105, height: 20, width: 100, color: getColor() },
-        { x: 270, y: 105, height: 20, width: 100, color: getColor() },
-        { x: 160, y: 105, height: 20, width: 100, color: getColor() },
-        { x: 50,  y: 105, height: 20, width: 100, color: getColor() },
-
-        { x: 20,  y: 135,  height: 20, width: 100, color: getColor() },
-        { x: 129, y: 135,  height: 20, width: 100, color: getColor() },
-        { x: 236, y: 135,  height: 20, width: 100, color: getColor() },
-        { x: 345, y: 135,  height: 20, width: 100, color: getColor() },
-        { x: 457, y: 135,  height: 20, width: 100, color: getColor() },
+            { x: 10,  y: 10,  height: 20, width: 100, color: getColor() },
+            { x: 115, y: 10, height: 20, width: 100, color: getColor() },
+            { x: 220, y: 10, height: 20, width: 100, color: getColor() },
+            { x: 327, y: 10, height: 20, width: 100, color: getColor() },
+            { x: 434, y: 10, height: 20, width: 100, color: getColor() },
+            
+            { x: 490, y: 40, height: 20, width: 100, color: getColor() },
+            { x: 380, y: 40, height: 20, width: 100, color: getColor() },
+            { x: 270, y: 40, height: 20, width: 100, color: getColor() },
+            { x: 160, y: 40, height: 20, width: 100, color: getColor() },
+            { x: 50,  y: 40, height: 20, width: 100, color: getColor() },
+            
+            { x: 20,  y: 70,  height: 20, width: 100, color: getColor() },
+            { x: 129, y: 70,  height: 20, width: 100, color: getColor() },
+            { x: 236, y: 70,  height: 20, width: 100, color: getColor() },
+            { x: 345, y: 70,  height: 20, width: 100, color: getColor() },
+            { x: 457, y: 70,  height: 20, width: 100, color: getColor() },
+    
+            { x: 490, y: 105, height: 20, width: 100, color: getColor() },
+            { x: 380, y: 105, height: 20, width: 100, color: getColor() },
+            { x: 270, y: 105, height: 20, width: 100, color: getColor() },
+            { x: 160, y: 105, height: 20, width: 100, color: getColor() },
+            { x: 50,  y: 105, height: 20, width: 100, color: getColor() },
+    
+            { x: 20,  y: 135,  height: 20, width: 100, color: getColor() },
+            { x: 129, y: 135,  height: 20, width: 100, color: getColor() },
+            { x: 236, y: 135,  height: 20, width: 100, color: getColor() },
+            { x: 345, y: 135,  height: 20, width: 100, color: getColor() },
+            { x: 457, y: 135,  height: 20, width: 100, color: getColor() },
         )
     }
 
     function doWin() {
-        if(box.length === 1){
-            alertPlayer("PARABÉNS!", "VOCÊ VENCEU")
+        if(box.length === 1) {
+            createBox()
+            level++
+            levelText.textContent = level.toString()
+            if(level === 5) {
+                points.push({
+                    x: 134,
+                    y: 145,
+                    oldX: 130,
+                    oldY: 140,
+                    color: getColor()
+                })
+            }
+            else if (level === 15) {
+                points.push({
+                    x: 134,
+                    y: 145,
+                    oldX: 130,
+                    oldY: 140,
+                    color: getColor()
+                })
+            }
+            else if (level === 25) {
+                points.push({
+                    x: 134,
+                    y: 145,
+                    oldX: 130,
+                    oldY: 140,
+                    color: getColor()
+                })
+            }
+            else if (level === 35) {
+                points.push({
+                    x: 134,
+                    y: 145,
+                    oldX: 130,
+                    oldY: 140,
+                    color: getColor()
+                })
+            }
+            else if (level === 50) {
+                points.push({
+                    x: 134,
+                    y: 145,
+                    oldX: 130,
+                    oldY: 140,
+                    color: getColor()
+                })
+            }
         }
     }
 
@@ -276,9 +315,14 @@ window.onload = function () {
             points[i].color = "#000";
             
         }
+
         alertTitle.textContent = title
         alertMessage.textContent = message
         alertContainer.style.visibility = "visible"
+        
+        const p = document.createElement("p")
+        p.textContent = "Score: "+score
+        alertContainer.appendChild(p)
 
     }
 }

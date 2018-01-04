@@ -397,7 +397,7 @@ window.onload = function () {
         alertMessage.textContent = message
         alertContainer.style.visibility = "visible"
 
-        if(!title === "Ops...") {
+        if(!title === "Ops...") { 
             const p = document.createElement("p")
             p.textContent = "Score: "+score
             alertContainer.appendChild(p)

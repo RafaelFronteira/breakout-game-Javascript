@@ -42,8 +42,8 @@ window.onload = function () {
     createBox()
 
 
-    canvas.addEventListener("mousemove", doMove)
-    canvas.addEventListener("touchmove", handlerStart)
+    canvas.addEventListener("mousemove", handlerClick)
+    canvas.addEventListener("touchmove", handlerTouch)
 
     update()
 
@@ -52,6 +52,27 @@ window.onload = function () {
         renderPoints()
         renderBox()
         requestAnimationFrame(update)
+    }
+
+    
+    function handlerClick(event) {
+        event.preventDefault()
+        if(event.buttons === 1) {
+            const b = box[0]
+            if(event.offsetX > b.x && event.offsetX < (b.x + b.width)) {
+                b.x = event.offsetX - (b.width / 2)
+            }
+        }
+    }
+
+    function handlerTouch(event) {
+        event.preventDefault();
+        const b = box[0]
+        const touch = event.changedTouches;
+
+        if(touch[0].pageX < (b.x + b.width) ) {
+            b.x = touch[0].pageX - (b.width / 10)
+        }
     }
 
 
@@ -196,28 +217,6 @@ window.onload = function () {
                 p.oldY = (b.y + b.height) + vy
             }
     }
-
-
-    function doMove(event) {
-        event.preventDefault()
-        if(event.buttons === 1) {
-            const b = box[0]
-            if(event.offsetX > b.x && event.offsetX < (b.x + b.width)) {
-                b.x = event.offsetX - (b.width / 2)
-            }
-        }
-    }
-
-    function handlerStart(event) {
-        event.preventDefault();
-        const touch = event.changedTouches;
-        const b = box[0]
-        if(touch[0].pageX >= b.x && touch[0].pageX <= (b.x + b.width)) {
-            console.log(touch[0].pageX - (b.width / 1.9))
-            b.x = touch[0].pageX - (b.width / 1.9)
-        }
-    }
-
 
     function getColor() {
         const a = hexa[Math.floor((Math.random() * 15) + 1) ],

@@ -26,7 +26,7 @@ window.onload = function () {
     console.log("Width => ", width)
 
 
-    if(width > 329 && width < 410) {  
+    if(width > 329 && width < 500) {  
         isMobile = true
 
         box.push({
@@ -265,6 +265,19 @@ window.onload = function () {
                 { x: 010, y: 160, height: 20, width: 100, color: getColor()},
                 { x: 160, y: 160, height: 20, width: 100, color: getColor()},
                 { x: 280, y: 160, height: 20, width: 100, color: getColor()},
+            )
+        }
+        else {
+            box.push(   
+                { x: 003, y: 10, height: 20, width: 100, color: getColor()},
+                { x: 120, y: 10, height: 20, width: 100, color: getColor()},
+                { x: 250, y: 10, height: 20, width: 100, color: getColor()},
+                { x: 250, y: 10, height: 20, width: 100, color: getColor()},
+
+                { x: 010, y: 40, height: 20, width: 100, color: getColor()},
+                { x: 160, y: 40, height: 20, width: 100, color: getColor()},
+                { x: 280, y: 40, height: 20, width: 100, color: getColor()},
+                { x: 280, y: 40, height: 20, width: 100, color: getColor()},
             )
         }
     }

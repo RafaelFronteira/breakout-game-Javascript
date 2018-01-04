@@ -23,15 +23,21 @@ window.onload = function () {
        y: 545,
        oldX: 285,
        oldY: 540,
-       color: "blue"
-    })
+       color: getColor()
+    },{
+        x: 134,
+        y: 145,
+        oldX: 130,
+        oldY: 140,
+        color: getColor()
+     })
 
     box.push({
         x: 250,
         y: 550,
         height: 40,
         width: 205,
-        color: "red"
+        color: getColor()
     });
 
     createBox()
@@ -262,11 +268,14 @@ window.onload = function () {
 
     function alertPlayer(title, message) {
         document.querySelector("body").style.background = "#000";
-        points[0].x = 0;
-        points[0].y = 0;
-        points[0].oldX = 0;
-        points[0].oldY = 0;
-        points[0].color = "#000";
+        for (let i = 0; i < points.length; i++) {
+            points[i].x = 0;
+            points[i].y = 0;
+            points[i].oldX = 0;
+            points[i].oldY = 0;
+            points[i].color = "#000";
+            
+        }
         alertTitle.textContent = title
         alertMessage.textContent = message
         alertContainer.style.visibility = "visible"

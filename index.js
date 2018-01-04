@@ -185,7 +185,7 @@ window.onload = function () {
                 }
                 b.color = getColor()
                 p.y = b.y
-                p.oldY = b.y + vy * 1.08
+                p.oldY = b.y + (vy * 1.07879)
             }
 
             //colisão em baixo
@@ -254,6 +254,22 @@ window.onload = function () {
     function doWin() {
         if(box.length === 1) {
             createBox()
+
+            box[0] = {
+                x: 250,
+                y: 550,
+                height: 40,
+                width: 205,
+                color: getColor()
+            }
+
+            points[0] = {
+                x: 290,
+                y: 545,
+                oldX: 285,
+                oldY: 540,
+                color: getColor()
+            }
             level++
             levelText.textContent = level.toString()
             if(level === 5) {
@@ -319,7 +335,7 @@ window.onload = function () {
         alertTitle.textContent = title
         alertMessage.textContent = message
         alertContainer.style.visibility = "visible"
-        
+
         const p = document.createElement("p")
         p.textContent = "Score: "+score
         alertContainer.appendChild(p)

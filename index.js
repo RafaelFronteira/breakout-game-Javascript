@@ -180,8 +180,8 @@ window.onload = function () {
 
             //colisão no topo
             if(p.y >= b.y && p.x >= b.x && p.x <= (b.x + b.width) && p.y > 0 && p.y <= b.y + vy) {
-                if(vy > 30){
-                    vy = 10
+                if(vy > 30) {
+                    vy = 30
                 }
                 b.color = getColor()
                 p.y = b.y

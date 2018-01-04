@@ -1,0 +1,60 @@
+body {    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.alert-container {
+    visibility:hidden; background-color:aliceblue; 
+    position:absolute; 
+    top:30%; 
+    left: 8%; 
+    border: 1px solid rgb(141, 141, 141);
+    border-radius: 5px; 
+    width:350px; height: 170px
+}
+
+.alert-button {
+    position: absolute; 
+    bottom:10%; 
+    left:15%
+}
+
+.score {
+    position: absolute; 
+    left: 75%;
+    top:0; 
+    font-size: 50px
+}
+
+.level {
+    position: absolute; 
+    left: 75%; 
+    top:10%; 
+    font-size: 50px
+}
+
+@media screen and (max-width: 850px) {
+    body {
+        margin:0;
+
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .canvas-container {
+        width: 100% !important;
+    }  
+    
+    
+    .board {
+        visibility: hidden;
+    }
+}

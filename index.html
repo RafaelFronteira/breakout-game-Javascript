@@ -6,33 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Breakout Game</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <style>
-        body {    
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-    
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script src="index.js"></script>
 </head>
 <body>
-    <h5 style="position: absolute; left: 75%; top:0; font-size: 50px">Score: <span id="point"></span></h5>
-    <h6 style="position: absolute; left: 75%; top:10%; font-size: 50px">Level: <span id="level"></span></h6>
+    <div class="board">
+        <h5 class="score">Score: <span id="point"></span></h5>
+        <h6 class="level">Level: <span id="level"></span></h6>
+    </div>
 
-    <div id="alertContainer" class="text-center " 
-        style="visibility:hidden; background-color:aliceblue; 
-        position:absolute; top:30%; left: 8%; 
-        border: 1px solid rgb(141, 141, 141);
-        border-radius: 5px; 
-        width:350px; height: 170px">
-
+    <div id="alertContainer" class="text-center alert-container">
         <p id="alertTitle" class="mx-2 my-0 font-weight-bold"></p>
         <p id="alertMessage" class="mx-2 my-3"></p>
-        <span style="position: absolute; bottom:10%; left:15%" class="btn btn-info w-75" onclick="resetPage()">OK</span>   
+        <span class="btn btn-info w-75 alert-button" onclick="resetPage()">OK</span>   
     </div>
 </body>
 </html>

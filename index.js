@@ -14,6 +14,7 @@ window.onload = function () {
     level = 1
 
     canvas.style.border = "1px solid #000"
+    canvas.classList.add('canvas-container')
 
     scoreText.textContent = score.toString()
     levelText.textContent = level.toString()
@@ -42,6 +43,7 @@ window.onload = function () {
 
 
     canvas.addEventListener("mousemove", doMove)
+    canvas.addEventListener("touchmove", handlerStart)
 
     update()
 
@@ -197,12 +199,21 @@ window.onload = function () {
 
 
     function doMove(event) {
+        event.preventDefault()
         if(event.buttons === 1) {
-            event.stopPropagation()
             const b = box[0]
             if(event.offsetX > b.x && event.offsetX < (b.x + b.width)) {
                 b.x = event.offsetX - (b.width / 2)
             }
+        }
+    }
+
+    function handlerStart(event) {
+        event.preventDefault();
+        const touch = event.changedTouches;
+        const b = box[0]
+        if(touch[0].screenX >= b.x && touch[0].screenX <= (b.x + b.width)) {
+            b.x = touch[0].screenX - (b.width / 1.6)
         }
     }
 

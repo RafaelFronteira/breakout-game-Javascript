@@ -10,7 +10,7 @@ window.onload = function () {
     let context =  canvas.getContext("2d"),
         score = 0 
         width = canvas.width = canvasContainer.offsetWidth,
-        height = canvas.height = 500,
+        height = canvas.height = 400,
         level = 1,
         typeScreen = { xSmall: false, small: false, middle: false, large: false, xLarge: false }
 
@@ -24,47 +24,20 @@ window.onload = function () {
        box = [];
 
     console.log("Width => ", width)
-
+    console.log(window.screenY)
 
     if(width < 544) {  
         typeScreen.xSmall = true
 
-        box.push({
-            x: 100,
-            y: 465,
-            height: 30,
-            width: 125,
-            color: getColor()
-        });
-
-        points.push({
-            x: 135,
-            y: 445,
-            d: 15,
-            oldX: 130,
-            oldY: 440,
-            color: getColor()
-        })
+        createPlayer()
+        createBall(135, 345, 13)
         
     } else if(width >= 544 && width < 768){
         typeScreen.small = true
 
-        box.push({
-            x: 100,
-            y: 465,
-            height: 30,
-            width: 125,
-            color: getColor()
-        });
-
-        points.push({
-            x: 135,
-            y: 435,
-            d: 15,
-            oldX: 130,
-            oldY: 430,
-            color: getColor()
-        })
+        createPlayer()
+        createBall(135, 345, 13)
+        
 
     } else if(width >= 768 && width < 992){
         typeScreen.middle = true
@@ -81,7 +54,8 @@ window.onload = function () {
     }
   
 
-
+    createPlayer()
+    createBall()
     createBox()
 
 
@@ -96,6 +70,7 @@ window.onload = function () {
         renderBox()
         requestAnimationFrame(update)
     }
+
 
     
     function handlerClick(event) {
@@ -116,6 +91,27 @@ window.onload = function () {
         if(touch[0].pageX < (b.x + b.width+10) ) {
             b.x = touch[0].pageX - (b.width / 7)
         }
+    }
+
+    function createPlayer() {
+        box[0] = {
+            x: 100,
+            y: 365,
+            height: 25,
+            width: 125,
+            color: getColor()
+        }
+    }
+
+    function createBall(x, y, d) {
+        points.push({
+            x: x,
+            y: y,
+            d: d,
+            oldX: x-4,
+            oldY: y-4,
+            color: getColor()
+        })
     }
 
 
@@ -357,90 +353,48 @@ window.onload = function () {
             if(typeScreen.xSmall) {
                 createBox()
 
-                box[0] = {
-                    x: 100,
-                    y: 465,
-                    height: 30,
-                    width: 125,
-                    color: getColor()
-                }
-        
-                points[0] = {
-                    x: 120,
-                    y: 445,
-                    d: 15,
-                    oldX: 115,
-                    oldY: 440,
-                    color: getColor()
-                }
+                createPlayer()
+                
+                createBall(120, 445, 13)
 
                 if(level === 3) {
-                    points.push({
-                        x: 130,
-                        y: 445,
-                        d: 15,
-                        oldX: 125,
-                        oldY: 440,
-                        color: getColor()
-                    })
+                    createBall(130, 445, 13)
                 }
                 else if (level === 15) {
-                    points.push({
-                        x: 133,
-                        y: 445,
-                        d: 15,
-                        oldX: 129,
-                        oldY: 440,
-                        color: getColor()
-                    })
+                    createBall(133, 445, 13)
                 }
                 else if (level === 25) {
-                    points.push({
-                        x: 129,
-                        y: 445,
-                        d: 15,
-                        oldX: 134,
-                        oldY: 440,
-                        color: getColor()
-                    })
+                    createBall(129, 445, 13)
                 }
                 else if (level === 35) {
-                    points.push({
-                        x: 130,
-                        y: 545,
-                        d: 15,
-                        oldX: 125,
-                        oldY: 540,
-                        color: getColor()
-                    })
+                    createBall(130, 545, 13)
                 }
                 else if (level === 50) {
-                    points.push({
-                        x: 135,
-                        y: 445,
-                        d: 15,
-                        oldX: 130,
-                        oldY: 440,
-                        color: getColor()
-                    })
+                    createBall(135, 445, 13)
                 }
+    
+            } 
+            else if(typeScreen.small) {
+                createBox()
 
-    
-            } else {
-                box[0] = {
-                    x: 250,
-                    y: 450,
-                    height: 40,
-                    width: 205,
-                    color: getColor()
+                createPlayer()
+                
+                createBall(120, 445, 13)
+
+                if(level === 3) {
+                    createBall(130, 445, 13)
                 }
-    
-                points[0] = {
-                    x: 290,
-                    y: 445,
-                    oldX: 285,
-                    oldY: 440,
-                    color: getColor()
+                else if (level === 15) {
+                    createBall(133, 445, 13)
+                }
+                else if (level === 25) {
+                    createBall(129, 445, 13)
+                }
+                else if (level === 35) {
+                    createBall(130, 545, 13)
+                }
+                else if (level === 50) {
+                    createBall(135, 445, 13)
                 }
             }
         }

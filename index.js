@@ -26,7 +26,7 @@ window.onload = function () {
     console.log("Width => ", width)
 
 
-    if(width >= 300 && width <= 450) {  
+    if(width >= 300 && width <= 480) {  
         isMobile = true
 
         box.push({

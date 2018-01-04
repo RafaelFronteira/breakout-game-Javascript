@@ -212,8 +212,9 @@ window.onload = function () {
         event.preventDefault();
         const touch = event.changedTouches;
         const b = box[0]
-        if(touch[0].screenX >= b.x && touch[0].screenX <= (b.x + b.width)) {
-            b.x = touch[0].screenX - (b.width / 1.6)
+        if(touch[0].pageX >= b.x && touch[0].pageX <= (b.x + b.width)) {
+            console.log(touch[0].pageX - (b.width / 1.9))
+            b.x = touch[0].pageX - (b.width / 1.9)
         }
     }
 

@@ -1,5 +1,5 @@
 window.onload = function () {
-    const hexa = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"]
+    const hexa = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
     const canvasContainer = document.getElementById("canvasContainer")
     const scoreText = document.getElementById("point")
     const alertContainer = document.getElementById("alertContainer")
@@ -7,12 +7,12 @@ window.onload = function () {
     const alertMessage = document.getElementById("alertMessage")
     const canvas = document.createElement("canvas")
     const levelText = document.getElementById("level")
-    let context =  canvas.getContext("2d"),
-        score = 0 
-        width = canvas.width = canvasContainer.offsetWidth,
+    let context = canvas.getContext("2d"),
+        score = 0
+    width = canvas.width = canvasContainer.offsetWidth,
         height = canvas.height = 400,
         level = 1,
-        typeScreen = { xSmall: false, small: false, middle: false, large: false, xLarge: false }
+        typeScreen = { xs: false, xSmall: false, small: false, middle: false, large: false, xLarge: false }
 
     canvas.style.border = "1px solid #000"
 
@@ -21,43 +21,43 @@ window.onload = function () {
     canvasContainer.appendChild(canvas)
 
     let points = [],
-       box = [];
+        box = [];
 
-    console.log("Width => ", width)
-    console.log(window.screenY)
+    if (width < 340) {
+        typeScreen.xs = true
 
-    if(width < 544) {  
+        createPlayer()
+        createBall(135, 345, 13)
+        createBox()
+
+    } else if (width >= 340 && width < 544) {
         typeScreen.xSmall = true
 
         createPlayer()
         createBall(135, 345, 13)
-        
-    } else if(width >= 544 && width < 768){
+        createBox()
+    }
+    else if (width >= 544 && width < 768) {
         typeScreen.small = true
 
         createPlayer()
         createBall(135, 345, 13)
-        
+        createBox()
 
-    } else if(width >= 768 && width < 992){
+
+    } else if (width >= 768 && width < 992) {
         typeScreen.middle = true
         alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
-    } else if(width >= 992 && width < 1200) {
+    } else if (width >= 992 && width < 1200) {
         typeScreen.large = true
         alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
-    } else if(width >= 1200) {
+    } else if (width >= 1200) {
         typeScreen.xLarge = true
         alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
     }
     else {
         alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
     }
-  
-
-    createPlayer()
-    createBall()
-    createBox()
-
 
     canvas.addEventListener("mousemove", handlerClick)
     canvas.addEventListener("touchmove", handlerTouch)
@@ -71,13 +71,11 @@ window.onload = function () {
         requestAnimationFrame(update)
     }
 
-
-    
     function handlerClick(event) {
         event.preventDefault()
-        if(event.buttons === 1) {
+        if (event.buttons === 1) {
             const b = box[0]
-            if(event.offsetX > b.x && event.offsetX < (b.x + b.width)) {
+            if (event.offsetX > b.x && event.offsetX < (b.x + b.width)) {
                 b.x = event.offsetX - (b.width / 2)
             }
         }
@@ -88,7 +86,7 @@ window.onload = function () {
         const b = box[0]
         const touch = event.changedTouches;
 
-        if(touch[0].pageX < (b.x + b.width+10) ) {
+        if (touch[0].pageX < (b.x + b.width + 10)) {
             b.x = touch[0].pageX - (b.width / 7)
         }
     }
@@ -108,15 +106,14 @@ window.onload = function () {
             x: x,
             y: y,
             d: d,
-            oldX: x-4,
-            oldY: y-4,
+            oldX: x - 3,
+            oldY: y - 3,
             color: getColor()
         })
     }
 
-
     function updatePoints() {
-        for(let i = 0; i < points.length; i++) {
+        for (let i = 0; i < points.length; i++) {
             const p = points[i]
 
             //Velocidade que o objeto se movimenta na tela no eixo X e Y a cada ciclo
@@ -138,11 +135,9 @@ window.onload = function () {
         }
     }
 
-
-
     function renderPoints() {
         context.clearRect(0, 0, width, height)
-        for(let i = 0; i < points.length; i++) {
+        for (let i = 0; i < points.length; i++) {
             const p = points[i]
             context.beginPath();
             context.fillStyle = p.color
@@ -159,16 +154,15 @@ window.onload = function () {
         }
     }
 
-
     function colisao(p, width, height, vx, vy) {
         //Detectando colisão eixo x da borda do canvas
-        if(p.x > width - 1) {
+        if (p.x > width - 1) {
             p.color = getColor()
 
             p.x = width
             p.oldX = p.x + vx
         }
-        else if(p.x < 0) {
+        else if (p.x < 0) {
             p.color = getColor()
 
             p.x = 0
@@ -176,10 +170,10 @@ window.onload = function () {
         }
 
         //Detectando colisão eixo Y da borda do canvas
-        if(p.y > height - 1) {
+        if (p.y > height - 1) {
             alertPlayer("OOU NOOU!", " Fim de jogo")
         }
-        else if(p.y < 0) {
+        else if (p.y < 0) {
             p.color = getColor()
             p.y = 0
             p.oldY = p.y + vy
@@ -192,214 +186,291 @@ window.onload = function () {
             const b = box[i];
 
             //colisão lado esquerdo
-            if(p.x >= b.x && p.y >= b.y && p.y <= (b.y + b.height) && p.x > 0 && p.x <= b.x + vx) {
+            if (p.x >= b.x && p.y >= b.y && p.y <= (b.y + b.height) && p.x > 0 && p.x <= b.x + vx) {
                 p.x = b.x
                 p.oldX = b.x + vx
                 box.splice(i, 1)
-                score += 20    
+                score += 20
                 scoreText.textContent = score.toString();
             }
-            else if(p.x <= (b.x + b.width) && p.y >= b.y && p.y <= (b.y + b.height) && p.x >= (b.x + b.width) + vx && p.x < width) {
+            else if (p.x <= (b.x + b.width) && p.y >= b.y && p.y <= (b.y + b.height) && p.x >= (b.x + b.width) + vx && p.x < width) {
                 p.x = (b.x + b.width)
                 p.oldX = (b.x + b.width) + vx
-                box.splice(i, 1)   
+                box.splice(i, 1)
                 score += 20
                 scoreText.textContent = score.toString();
             }
-            else if(p.y >= b.y && p.x >= b.x && p.x <= (b.x + b.width) && p.y > 0 && p.y <= b.y + vy) {
+            else if (p.y >= b.y && p.x >= b.x && p.x <= (b.x + b.width) && p.y > 0 && p.y <= b.y + vy) {
                 p.y = b.y
                 p.oldY = b.y + vy
-                box.splice(i, 1)   
+                box.splice(i, 1)
                 score += 20
                 scoreText.textContent = score.toString();
             }
-            else if(p.y <= (b.y + b.height) && p.x >= b.x && p.x <= (b.x + b.width) && p.y >= (b.y + b.height) + vy && p.y < height) {
+            else if (p.y <= (b.y + b.height) && p.x >= b.x && p.x <= (b.x + b.width) && p.y >= (b.y + b.height) + vy && p.y < height) {
                 p.y = (b.y + b.height)
                 p.oldY = (b.y + b.height) + vy
-                box.splice(i, 1)   
+                box.splice(i, 1)
                 score += 20
                 scoreText.textContent = score.toString();
             }
-            
+
         }
     }
-
 
     function playerColider(p, width, height, vx, vy) {
         const b = box[0];
 
-            //colisão lado esquerdo
-            if(p.x >= b.x && p.y >= b.y && p.y <= (b.y + b.height) && p.x > 0 && p.x <= b.x + vx) {
-                p.x = b.x
-                p.oldX = b.x + vx     
-            }
+        //colisão lado esquerdo
+        if (p.x >= b.x && p.y >= b.y && p.y <= (b.y + b.height) && p.x > 0 && p.x <= b.x + vx) {
+            p.x = b.x
+            p.oldX = b.x + vx
+        }
 
-            //colisão lado direito
-            if(p.x <= (b.x + b.width) && p.y >= b.y && p.y <= (b.y + b.height) && p.x >= (b.x + b.width) + vx && p.x < width) {
-                p.x = (b.x + b.width)
-                p.oldX = (b.x + b.width) + vx
-            }
+        //colisão lado direito
+        if (p.x <= (b.x + b.width) && p.y >= b.y && p.y <= (b.y + b.height) && p.x >= (b.x + b.width) + vx && p.x < width) {
+            p.x = (b.x + b.width)
+            p.oldX = (b.x + b.width) + vx
+        }
 
-            //colisão no topo
-            if(p.y >= b.y && p.x >= b.x && p.x <= (b.x + b.width) && p.y > 0 && p.y <= b.y + vy) {
-                if(vy > 30) {
-                    vy = 30
-                }
-                b.color = getColor()
-                p.y = b.y
-                p.oldY = b.y + (vy * 1.07879)
+        //colisão no topo
+        if (p.y >= b.y && p.x >= b.x && p.x <= (b.x + b.width) && p.y > 0 && p.y <= b.y + vy) {
+            if (vy > 30) {
+                vy = 30
             }
+            b.color = getColor()
+            p.y = b.y
+            p.oldY = b.y + (vy * 1.02)
+        }
 
-            //colisão em baixo
-            if(p.y <= (b.y + b.height) && p.x >= b.x && p.x <= (b.x + b.width) && p.y >= (b.y + b.height) + vy && p.y < height) {
-                p.y = (b.y + b.height)
-                p.oldY = (b.y + b.height) + vy
-            }
+        //colisão em baixo
+        if (p.y <= (b.y + b.height) && p.x >= b.x && p.x <= (b.x + b.width) && p.y >= (b.y + b.height) + vy && p.y < height) {
+            p.y = (b.y + b.height)
+            p.oldY = (b.y + b.height) + vy
+        }
     }
 
     function getColor() {
-        const a = hexa[Math.floor((Math.random() * 15) + 1) ],
-              b = hexa[Math.floor((Math.random() * 15) + 1) ],
-              c = hexa[Math.floor((Math.random() * 15) + 1) ],
-              d = hexa[Math.floor((Math.random() * 15) + 1) ],
-              e = hexa[Math.floor((Math.random() * 15) + 1) ],
-              f = hexa[Math.floor((Math.random() * 15) + 1) ];
-        return "#"+a+b+c+d+e+f;
+        const a = hexa[Math.floor((Math.random() * 15) + 1)],
+            b = hexa[Math.floor((Math.random() * 15) + 1)],
+            c = hexa[Math.floor((Math.random() * 15) + 1)],
+            d = hexa[Math.floor((Math.random() * 15) + 1)],
+            e = hexa[Math.floor((Math.random() * 15) + 1)],
+            f = hexa[Math.floor((Math.random() * 15) + 1)];
+        return "#" + a + b + c + d + e + f;
     }
 
     function createBox() {
-        if(typeScreen.xSmall) {
-            box.push(   
-                { x: (width/width) + 5, y: 10, height: 20, width: 100, color: getColor()},
-                { x: width/2.3,         y: 10, height: 20, width: 100, color: getColor()},
-                { x: width-110,         y: 10, height: 20, width: 100, color: getColor()},
+        if (typeScreen.xs) {
+            box.push(
+                { x: 5, y: 10, height: 20, width: 50, color: getColor() },
+                { x: width / 5, y: 10, height: 20, width: 50, color: getColor() },
+                { x: width / 2.3, y: 10, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 10, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 10, height: 20, width: 50, color: getColor() },
 
-                { x: 20,           y: 40, height: 20, width: 100, color: getColor()},
-                { x: width/2.9,    y: 40, height: 20, width: 100, color: getColor()},
-                { x: width-150,    y: 40, height: 20, width: 100, color: getColor()},
+                { x: 10, y: 40, height: 20, width: 50, color: getColor() },
+                { x: width / 4, y: 40, height: 20, width: 50, color: getColor() },
+                { x: width / 2.2, y: 40, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 40, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 40, height: 20, width: 50, color: getColor() },
 
-                { x: (width/width) + 5, y: 70, height: 20, width: 100, color: getColor()},
-                { x: width/2.3,         y: 70, height: 20, width: 100, color: getColor()},
-                { x: width-110,         y: 70, height: 20, width: 100, color: getColor()},
+                { x: 5, y: 70, height: 20, width: 50, color: getColor() },
+                { x: width / 5, y: 70, height: 20, width: 50, color: getColor() },
+                { x: width / 2.3, y: 70, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 70, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 70, height: 20, width: 50, color: getColor() },
 
-                { x: 20,           y: 100, height: 20, width: 100, color: getColor()},
-                { x: width/2.9,    y: 100, height: 20, width: 100, color: getColor()},
-                { x: width-150,    y: 100, height: 20, width: 100, color: getColor()},
+                { x: 10, y: 100, height: 20, width: 50, color: getColor() },
+                { x: width / 4, y: 100, height: 20, width: 50, color: getColor() },
+                { x: width / 2.2, y: 100, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 100, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 100, height: 20, width: 50, color: getColor() },
 
-                { x: (width/width) + 5, y: 130, height: 20, width: 100, color: getColor()},
-                { x: width/2.3,         y: 130, height: 20, width: 100, color: getColor()},
-                { x: width-110,         y: 130, height: 20, width: 100, color: getColor()},
+                { x: 5, y: 130, height: 20, width: 50, color: getColor() },
+                { x: width / 5, y: 130, height: 20, width: 50, color: getColor() },
+                { x: width / 2.3, y: 130, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 130, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 130, height: 20, width: 50, color: getColor() },
 
-                { x: 20,           y: 160, height: 20, width: 100, color: getColor()},
-                { x: width/2.9,    y: 160, height: 20, width: 100, color: getColor()},
-                { x: width-150,    y: 160, height: 20, width: 100, color: getColor()},
+                { x: 10, y: 160, height: 20, width: 50, color: getColor() },
+                { x: width / 4, y: 160, height: 20, width: 50, color: getColor() },
+                { x: width / 2.2, y: 160, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 160, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 160, height: 20, width: 50, color: getColor() },
             )
         }
-        else if(typeScreen.small) {
-            box.push(   
-                { x: (width/width) + 5, y: 10, height: 20, width: 100, color: getColor()},
-                { x: width/5,           y: 10, height: 20, width: 100, color: getColor()},
-                { x: (width/3.3) + 50,  y: 10, height: 20, width: 100, color: getColor()},
-                { x: (width/1.7),       y: 10, height: 20, width: 100, color: getColor()},
-                { x: width-110,         y: 10, height: 20, width: 100, color: getColor()},
+        else if (typeScreen.xSmall) {
+            box.push(
+                { x: (width / width) + 5, y: 10, height: 20, width: 100, color: getColor() },
+                { x: width / 2.3, y: 10, height: 20, width: 100, color: getColor() },
+                { x: width - 110, y: 10, height: 20, width: 100, color: getColor() },
 
-                { x: 20,                y: 40, height: 20, width: 100, color: getColor()},
-                { x: width/4,           y: 40, height: 20, width: 100, color: getColor()},
-                { x: (width/3.2) + 80,  y: 40, height: 20, width: 100, color: getColor()},
-                { x: (width/1.6) + 10,  y: 40, height: 20, width: 100, color: getColor()},
-                { x: width-90,          y: 40, height: 20, width: 100, color: getColor()},
+                { x: 20, y: 40, height: 20, width: 100, color: getColor() },
+                { x: width / 2.9, y: 40, height: 20, width: 100, color: getColor() },
+                { x: width - 150, y: 40, height: 20, width: 100, color: getColor() },
 
-                { x: (width/width) + 5, y: 70, height: 20, width: 100, color: getColor()},
-                { x: width/5,           y: 70, height: 20, width: 100, color: getColor()},
-                { x: (width/3.3) + 50,  y: 70, height: 20, width: 100, color: getColor()},
-                { x: (width/1.7),       y: 70, height: 20, width: 100, color: getColor()},
-                { x: width-110,         y: 70, height: 20, width: 100, color: getColor()},
+                { x: (width / width) + 5, y: 70, height: 20, width: 100, color: getColor() },
+                { x: width / 2.3, y: 70, height: 20, width: 100, color: getColor() },
+                { x: width - 110, y: 70, height: 20, width: 100, color: getColor() },
 
-                { x: 20,                y: 100, height: 20, width: 100, color: getColor()},
-                { x: width/4,           y: 100, height: 20, width: 100, color: getColor()},
-                { x: (width/3.2) + 80,  y: 100, height: 20, width: 100, color: getColor()},
-                { x: (width/1.6) + 10,  y: 100, height: 20, width: 100, color: getColor()},
-                { x: width-90,          y: 100, height: 20, width: 100, color: getColor()},
+                { x: 20, y: 100, height: 20, width: 100, color: getColor() },
+                { x: width / 2.9, y: 100, height: 20, width: 100, color: getColor() },
+                { x: width - 150, y: 100, height: 20, width: 100, color: getColor() },
 
-                { x: (width/width) + 5, y: 130, height: 20, width: 100, color: getColor()},
-                { x: width/5,           y: 130, height: 20, width: 100, color: getColor()},
-                { x: (width/3.3) + 50,  y: 130, height: 20, width: 100, color: getColor()},
-                { x: (width/1.7),       y: 130, height: 20, width: 100, color: getColor()},
-                { x: width-110,         y: 130, height: 20, width: 100, color: getColor()},
+                { x: (width / width) + 5, y: 130, height: 20, width: 100, color: getColor() },
+                { x: width / 2.3, y: 130, height: 20, width: 100, color: getColor() },
+                { x: width - 110, y: 130, height: 20, width: 100, color: getColor() },
 
-                { x: 20,                y: 160, height: 20, width: 100, color: getColor()},
-                { x: width/4,           y: 160, height: 20, width: 100, color: getColor()},
-                { x: (width/3.2) + 80,  y: 160, height: 20, width: 100, color: getColor()},
-                { x: (width/1.6) + 10,  y: 160, height: 20, width: 100, color: getColor()},
-                { x: width-90,          y: 160, height: 20, width: 100, color: getColor()},
+                { x: 20, y: 160, height: 20, width: 100, color: getColor() },
+                { x: width / 2.9, y: 160, height: 20, width: 100, color: getColor() },
+                { x: width - 150, y: 160, height: 20, width: 100, color: getColor() },
+            )
+        }
+        else if (typeScreen.small) {
+            box.push(
+                { x: (width / width) + 5, y: 10, height: 20, width: 100, color: getColor() },
+                { x: width / 5, y: 10, height: 20, width: 100, color: getColor() },
+                { x: (width / 3.3) + 50, y: 10, height: 20, width: 100, color: getColor() },
+                { x: (width / 1.7), y: 10, height: 20, width: 100, color: getColor() },
+                { x: width - 110, y: 10, height: 20, width: 100, color: getColor() },
+
+                { x: 20, y: 40, height: 20, width: 100, color: getColor() },
+                { x: width / 4, y: 40, height: 20, width: 100, color: getColor() },
+                { x: (width / 3.2) + 80, y: 40, height: 20, width: 100, color: getColor() },
+                { x: (width / 1.6) + 10, y: 40, height: 20, width: 100, color: getColor() },
+                { x: width - 90, y: 40, height: 20, width: 100, color: getColor() },
+
+                { x: (width / width) + 5, y: 70, height: 20, width: 100, color: getColor() },
+                { x: width / 5, y: 70, height: 20, width: 100, color: getColor() },
+                { x: (width / 3.3) + 50, y: 70, height: 20, width: 100, color: getColor() },
+                { x: (width / 1.7), y: 70, height: 20, width: 100, color: getColor() },
+                { x: width - 110, y: 70, height: 20, width: 100, color: getColor() },
+
+                { x: 20, y: 100, height: 20, width: 100, color: getColor() },
+                { x: width / 4, y: 100, height: 20, width: 100, color: getColor() },
+                { x: (width / 3.2) + 80, y: 100, height: 20, width: 100, color: getColor() },
+                { x: (width / 1.6) + 10, y: 100, height: 20, width: 100, color: getColor() },
+                { x: width - 90, y: 100, height: 20, width: 100, color: getColor() },
+
+                { x: (width / width) + 5, y: 130, height: 20, width: 100, color: getColor() },
+                { x: width / 5, y: 130, height: 20, width: 100, color: getColor() },
+                { x: (width / 3.3) + 50, y: 130, height: 20, width: 100, color: getColor() },
+                { x: (width / 1.7), y: 130, height: 20, width: 100, color: getColor() },
+                { x: width - 110, y: 130, height: 20, width: 100, color: getColor() },
+
+                { x: 20, y: 160, height: 20, width: 100, color: getColor() },
+                { x: width / 4, y: 160, height: 20, width: 100, color: getColor() },
+                { x: (width / 3.2) + 80, y: 160, height: 20, width: 100, color: getColor() },
+                { x: (width / 1.6) + 10, y: 160, height: 20, width: 100, color: getColor() },
+                { x: width - 90, y: 160, height: 20, width: 100, color: getColor() },
 
             )
+        } 
+        else if (typeScreen.middle) {
 
-        } else if(typeScreen.middle) {
-
-        } else if(typeScreen.large){
+        } 
+        else if (typeScreen.large) {
 
         }
-        else if(typeScreen.xLarge) {
+        else if (typeScreen.xLarge) {
 
         }
     }
 
     function doWin() {
-        if(box.length === 1) {
+        if (box.length === 1) {
             level++
             levelText.textContent = level.toString()
 
-            if(typeScreen.xSmall) {
+            if (typeScreen.xs) {
                 createBox()
-
                 createPlayer()
-                
-                createBall(120, 445, 13)
 
-                if(level === 3) {
-                    createBall(130, 445, 13)
+                points[0] = {
+                    x: 135,
+                    y: 345,
+                    d: 13,
+                    oldX: 132,
+                    oldY: 342
+                }
+                if (level === 3) {
+                    createBall(130, 345, 13)
                 }
                 else if (level === 15) {
-                    createBall(133, 445, 13)
+                    createBall(133, 345, 13)
                 }
                 else if (level === 25) {
-                    createBall(129, 445, 13)
+                    createBall(129, 345, 13)
                 }
                 else if (level === 35) {
-                    createBall(130, 545, 13)
+                    createBall(130, 345, 13)
                 }
                 else if (level === 50) {
-                    createBall(135, 445, 13)
-                }
-    
-            } 
-            else if(typeScreen.small) {
-                createBox()
-
-                createPlayer()
-                
-                createBall(120, 445, 13)
-
-                if(level === 3) {
-                    createBall(130, 445, 13)
-                }
-                else if (level === 15) {
-                    createBall(133, 445, 13)
-                }
-                else if (level === 25) {
-                    createBall(129, 445, 13)
-                }
-                else if (level === 35) {
-                    createBall(130, 545, 13)
-                }
-                else if (level === 50) {
-                    createBall(135, 445, 13)
+                    createBall(135, 345, 13)
                 }
             }
+            else if (typeScreen.xSmall) {
+                createBox()
+                createPlayer()
+
+                points[0] = {
+                    x: 135,
+                    y: 345,
+                    d: 13,
+                    oldX: 132,
+                    oldY: 342
+                }
+
+                if (level === 3) {
+                    createBall(130, 345, 13)
+                }
+                else if (level === 15) {
+                    createBall(133, 345, 13)
+                }
+                else if (level === 25) {
+                    createBall(129, 345, 13)
+                }
+                else if (level === 35) {
+                    createBall(130, 345, 13)
+                }
+                else if (level === 50) {
+                    createBall(135, 345, 13)
+
+                }
+
+            }
+            else if (typeScreen.small) {
+                    createBox()
+                    createPlayer()
+
+                    points[0] = {
+                        x: 135,
+                        y: 345,
+                        d: 13,
+                        oldX: 132,
+                        oldY: 342
+                    }
+
+
+                    if (level === 3) {
+                        createBall(130, 345, 13)
+                    }
+                    else if (level === 15) {
+                        createBall(133, 345, 13)
+                    }
+                    else if (level === 25) {
+                        createBall(129, 345, 13)
+                    }
+                    else if (level === 35) {
+                        createBall(130, 345, 13)
+                    }
+                    else if (level === 50) {
+                        createBall(135, 345, 13)
+                    }
+                }
         }
     }
-
 
     function alertPlayer(title, message) {
         document.querySelector("body").style.background = "#000";
@@ -409,21 +480,20 @@ window.onload = function () {
             points[i].oldX = 0;
             points[i].oldY = 0;
             points[i].color = "#000";
-            
         }
 
         alertTitle.textContent = title
         alertMessage.textContent = message
         alertContainer.style.visibility = "visible"
 
-        if(!title == "Ops...") { 
+        if (!title == "Ops...") {
             const p = document.createElement("p")
-            p.textContent = "Score: "+score
+            p.textContent = "Score: " + score
             alertContainer.appendChild(p)
         }
     }
-
 }
+
 
 function resetPage() {
     window.location.reload()

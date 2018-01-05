@@ -87,7 +87,7 @@ window.onload = function () {
         const touch = event.changedTouches;
 
         if (touch[0].pageX < (b.x + b.width + 10)) {
-            b.x = touch[0].pageX - (b.width / 7)
+            b.x = touch[0].pageX - ((b.x + b.width) / 3)
         }
     }
 
@@ -302,29 +302,41 @@ window.onload = function () {
         }
         else if (typeScreen.xSmall) {
             box.push(
-                { x: (width / width) + 5, y: 10, height: 20, width: 100, color: getColor() },
-                { x: width / 2.3, y: 10, height: 20, width: 100, color: getColor() },
-                { x: width - 110, y: 10, height: 20, width: 100, color: getColor() },
+                { x: 5, y: 10, height: 20, width: 50, color: getColor() },
+                { x: width / 5, y: 10, height: 20, width: 50, color: getColor() },
+                { x: width / 2.3, y: 10, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 10, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 10, height: 20, width: 50, color: getColor() },
 
-                { x: 20, y: 40, height: 20, width: 100, color: getColor() },
-                { x: width / 2.9, y: 40, height: 20, width: 100, color: getColor() },
-                { x: width - 150, y: 40, height: 20, width: 100, color: getColor() },
+                { x: 10, y: 40, height: 20, width: 50, color: getColor() },
+                { x: width / 4, y: 40, height: 20, width: 50, color: getColor() },
+                { x: width / 2.2, y: 40, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 40, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 40, height: 20, width: 50, color: getColor() },
 
-                { x: (width / width) + 5, y: 70, height: 20, width: 100, color: getColor() },
-                { x: width / 2.3, y: 70, height: 20, width: 100, color: getColor() },
-                { x: width - 110, y: 70, height: 20, width: 100, color: getColor() },
+                { x: 5, y: 70, height: 20, width: 50, color: getColor() },
+                { x: width / 5, y: 70, height: 20, width: 50, color: getColor() },
+                { x: width / 2.3, y: 70, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 70, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 70, height: 20, width: 50, color: getColor() },
 
-                { x: 20, y: 100, height: 20, width: 100, color: getColor() },
-                { x: width / 2.9, y: 100, height: 20, width: 100, color: getColor() },
-                { x: width - 150, y: 100, height: 20, width: 100, color: getColor() },
+                { x: 10, y: 100, height: 20, width: 50, color: getColor() },
+                { x: width / 4, y: 100, height: 20, width: 50, color: getColor() },
+                { x: width / 2.2, y: 100, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 100, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 100, height: 20, width: 50, color: getColor() },
 
-                { x: (width / width) + 5, y: 130, height: 20, width: 100, color: getColor() },
-                { x: width / 2.3, y: 130, height: 20, width: 100, color: getColor() },
-                { x: width - 110, y: 130, height: 20, width: 100, color: getColor() },
+                { x: 5, y: 130, height: 20, width: 50, color: getColor() },
+                { x: width / 5, y: 130, height: 20, width: 50, color: getColor() },
+                { x: width / 2.3, y: 130, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 130, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 130, height: 20, width: 50, color: getColor() },
 
-                { x: 20, y: 160, height: 20, width: 100, color: getColor() },
-                { x: width / 2.9, y: 160, height: 20, width: 100, color: getColor() },
-                { x: width - 150, y: 160, height: 20, width: 100, color: getColor() },
+                { x: 10, y: 160, height: 20, width: 50, color: getColor() },
+                { x: width / 4, y: 160, height: 20, width: 50, color: getColor() },
+                { x: width / 2.2, y: 160, height: 20, width: 50, color: getColor() },
+                { x: width - 110, y: 160, height: 20, width: 50, color: getColor() },
+                { x: width - 50, y: 160, height: 20, width: 50, color: getColor() },
             )
         }
         else if (typeScreen.small) {
@@ -436,7 +448,6 @@ window.onload = function () {
                 }
                 else if (level === 50) {
                     createBall(135, 345, 13)
-
                 }
 
             }

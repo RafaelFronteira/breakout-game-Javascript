@@ -27,21 +27,21 @@ window.onload = function () {
         typeScreen.xs = true
 
         createPlayer()
-        createBall(135, 345, 13)
+        createBall(135, 305, 13)
         createBox()
 
     } else if (width >= 340 && width < 544) {
         typeScreen.xSmall = true
 
         createPlayer()
-        createBall(135, 345, 13)
+        createBall(135, 305, 13)
         createBox()
     }
     else if (width >= 544 && width < 768) {
         typeScreen.small = true
 
         createPlayer()
-        createBall(135, 345, 13)
+        createBall(135, 305, 13)
         createBox()
 
 
@@ -77,7 +77,7 @@ window.onload = function () {
             const b = box[0]
             if (event.offsetX > b.x && event.offsetX < (b.x + b.width)) {
                 b.x = event.offsetX - (b.width / 2)
-                if(b.x > width - 1) {
+                if(b.x > width - 5) {
                     b.x = width
                 }
                 if(b.x < 0 ){
@@ -94,7 +94,7 @@ window.onload = function () {
 
         if (touch[0].pageX < (b.x + b.width + 10)) {
             b.x = touch[0].pageX - ((b.x + b.width) / 3)
-            if(b.x > width - 1) {
+            if(b.x > width - 5) {
                 b.x = width
             }
             if(b.x < 0 ){
@@ -414,25 +414,25 @@ window.onload = function () {
 
                 points[0] = {
                     x: 135,
-                    y: 345,
+                    y: 305,
                     d: 13,
                     oldX: 132,
-                    oldY: 342
+                    oldY: 302
                 }
                 if (level === 3) {
-                    createBall(130, 345, 13)
+                    createBall(130, 305, 13)
                 }
                 else if (level === 15) {
-                    createBall(133, 345, 13)
+                    createBall(133, 305, 13)
                 }
                 else if (level === 25) {
-                    createBall(129, 345, 13)
+                    createBall(129, 305, 13)
                 }
                 else if (level === 35) {
-                    createBall(130, 345, 13)
+                    createBall(130, 305, 13)
                 }
                 else if (level === 50) {
-                    createBall(135, 345, 13)
+                    createBall(135, 305, 13)
                 }
             }
             else if (typeScreen.xSmall) {
@@ -441,26 +441,26 @@ window.onload = function () {
 
                 points[0] = {
                     x: 135,
-                    y: 345,
+                    y: 305,
                     d: 13,
                     oldX: 132,
-                    oldY: 342
+                    oldY: 302
                 }
 
                 if (level === 3) {
-                    createBall(130, 345, 13)
+                    createBall(130, 305, 13)
                 }
                 else if (level === 15) {
-                    createBall(133, 345, 13)
+                    createBall(133, 305, 13)
                 }
                 else if (level === 25) {
-                    createBall(129, 345, 13)
+                    createBall(129, 305, 13)
                 }
                 else if (level === 35) {
-                    createBall(130, 345, 13)
+                    createBall(130, 305, 13)
                 }
                 else if (level === 50) {
-                    createBall(135, 345, 13)
+                    createBall(135, 305, 13)
                 }
 
             }
@@ -470,27 +470,27 @@ window.onload = function () {
 
                     points[0] = {
                         x: 135,
-                        y: 345,
+                        y: 305,
                         d: 13,
                         oldX: 132,
-                        oldY: 342
+                        oldY: 302
                     }
 
 
                     if (level === 3) {
-                        createBall(130, 345, 13)
+                        createBall(130, 305, 13)
                     }
                     else if (level === 15) {
-                        createBall(133, 345, 13)
+                        createBall(133, 305, 13)
                     }
                     else if (level === 25) {
-                        createBall(129, 345, 13)
+                        createBall(129, 305, 13)
                     }
                     else if (level === 35) {
-                        createBall(130, 345, 13)
+                        createBall(130, 305, 13)
                     }
                     else if (level === 50) {
-                        createBall(135, 345, 13)
+                        createBall(135, 305, 13)
                     }
                 }
         }

@@ -77,6 +77,12 @@ window.onload = function () {
             const b = box[0]
             if (event.offsetX > b.x && event.offsetX < (b.x + b.width)) {
                 b.x = event.offsetX - (b.width / 2)
+                if(b.x > width - 1) {
+                    b.x = width
+                }
+                if(b.x < 0 ){
+                    b.x = 0
+                }
             }
         }
     }
@@ -88,6 +94,13 @@ window.onload = function () {
 
         if (touch[0].pageX < (b.x + b.width + 10)) {
             b.x = touch[0].pageX - ((b.x + b.width) / 3)
+            if(b.x > width - 1) {
+                b.x = width
+            }
+            if(b.x < 0 ){
+                b.x = 0
+            }
+
         }
     }
 

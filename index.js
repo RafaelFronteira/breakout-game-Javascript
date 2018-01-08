@@ -37,27 +37,14 @@ window.onload = function () {
         createBall(135, 305, 13)
         createBox()
     }
-    else if (width >= 544 && width < 768) {
+    else if (width >= 544 && width < 601) {
         typeScreen.small = true
 
         createPlayer()
         createBall(135, 305, 13)
         createBox()
-
-
-    } else if (width >= 768 && width < 992) {
-        typeScreen.middle = true
-        alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
-    } else if (width >= 992 && width < 1200) {
-        typeScreen.large = true
-        alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
-    } else if (width >= 1200) {
-        typeScreen.xLarge = true
-        alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
     }
-    else {
-        alertPlayer("Ops...", "Ainda estou desenvolvendo para seu dispositivo :)")
-    }
+    
 
     canvas.addEventListener("mousemove", handlerClick)
     canvas.addEventListener("touchmove", handlerTouch)
@@ -79,6 +66,7 @@ window.onload = function () {
                 b.x = event.offsetX - (b.width / 2)
                 if(b.x > width - 5) {
                     b.x = width
+                    console.log("Bx => ",b.x)
                 }
                 if(b.x < 0 ){
                     b.x = 0
@@ -92,26 +80,24 @@ window.onload = function () {
         const b = box[0]
         const touch = event.changedTouches;
 
-        if (touch[0].pageX < (b.x + b.width + 10)) {
-            b.x = touch[0].pageX - ((b.x + b.width) / 3)
-            if(b.x > width - 5) {
-                b.x = width
-            }
-            if(b.x < 0 ){
-                b.x = 0
-            }
-
+        b.x = touch[0].pageX - ((b.x + b.width) / 3)
+        if(b.x > width) {
+            b.x = width
+        }
+        if(b.x < 0 ){
+            b.x = 0
         }
     }
 
     function createPlayer() {
-        box[0] = {
-            x: 100,
-            y: 365,
-            height: 25,
-            width: 125,
-            color: getColor()
-        }
+            box[0] = {
+                x: 100,
+                y: 365,
+                height: 25,
+                width: 125,
+                color: getColor()
+            }
+       
     }
 
     function createBall(x, y, d) {
